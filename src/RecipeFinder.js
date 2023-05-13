@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './RecipeFinder.css';
 import apiKey from './api';
 
@@ -7,24 +7,27 @@ function RecipeFinder() {
   const [excludeItems, setExcludeItems] = useState([]);
   const [maxPreparationTime, setMaxPreparationTime] = useState('');
   const [recipes, setRecipes] = useState([]);
+  const includeInput = useRef()
+  const excludeInput = useRef()
+  const numberPerPage = 3;
 
-  const handleIncludeItemAdd = (event) => {
-    if (event.key === 'Enter' && event.target.value.trim() !== '') {
-      const newItem = event.target.value.trim();
+  const handleIncludeItemAdd = () => {
+    if (includeInput.current.value.trim() !== '') {
+      const newItem = includeInput.current.value.trim();
       if (!includeItems.includes(newItem)) {
         setIncludeItems([...includeItems, newItem]);
       }
-      event.target.value = '';
+      includeInput.current.value = '';
     }
   };
 
-  const handleExcludeItemAdd = (event) => {
-    if (event.key === 'Enter' && event.target.value.trim() !== '') {
-      const newItem = event.target.value.trim();
+  const handleExcludeItemAdd = () => {
+    if (excludeInput.current.value.trim() !== '') {
+      const newItem = excludeInput.current.value.trim();
       if (!excludeItems.includes(newItem)) {
         setExcludeItems([...excludeItems, newItem]);
       }
-      event.target.value = '';
+      excludeInput.current.value = '';
     }
   };
 
@@ -42,9 +45,13 @@ function RecipeFinder() {
 
   const handleSubmit = () => {
     const api_key = apiKey; // Use a different variable name here
+
+    handleIncludeItemAdd()
+    handleExcludeItemAdd()
     const includeIngredientsString = includeItems.join(',');
     const excludeIngredientsString = excludeItems.join(',');
-    const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?includeIngredients=${encodeURIComponent(includeIngredientsString)}&excludeIngredients=${encodeURIComponent(excludeIngredientsString)}&maxReadyTime=${maxPreparationTime}&number=2&apiKey=${api_key}`;
+    const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?includeIngredients=${encodeURIComponent(includeIngredientsString)}&excludeIngredients=${encodeURIComponent(excludeIngredientsString)}&maxReadyTime=${maxPreparationTime || 30}&number=${numberPerPage}&apiKey=${api_key}`;
+    
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
@@ -65,7 +72,11 @@ return (
         <input
           type="text"
           id="includeItems"
-          onKeyDown={handleIncludeItemAdd}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') handleIncludeItemAdd();
+          }}
+          onBlur={handleIncludeItemAdd}
+          ref={includeInput}
           placeholder="Type and press Enter"
         />
         <div className="tags">
@@ -82,7 +93,11 @@ return (
         <input
           type="text"
           id="excludeItems"
-          onKeyDown={handleExcludeItemAdd}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') handleExcludeItemAdd();
+          }}
+          onBlur={handleExcludeItemAdd}
+          ref={excludeInput}
           placeholder="Type and press Enter"
         />
         <div className="tags">
@@ -109,12 +124,15 @@ return (
     </div>
     <div className="recipes">
       {recipes.map((recipe) => (
-        <div key={recipe.id} className="recipe">
+      <div key={recipe.id} className="recipe">
+        <div className="image-container">
           <img src={recipe.image} alt={recipe.title} />
-          <h3>{recipe.title}</h3>
         </div>
-      ))}
+        <h3>{recipe.title}</h3>
+      </div>
+    ))}
     </div>
+
   </div>
 );
 

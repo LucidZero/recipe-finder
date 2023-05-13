@@ -1,47 +1,70 @@
 .recipe-finder {
-    padding: 20px;
-  }
-  
-  .recipe-finder h2 {
-    margin-bottom: 20px;
-  }
-  
-  .options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .option {
-    flex-basis: 300px;
-  }
-  
-  .option label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-top: 5px;
-  }
-  
-  .tag {
-    display: flex;
-    align-items: center;
-    background-color: #f0f0f0;
-    padding: 5px 10px;
-    border-radius: 20px;
-  }
-  
-  .tag button {
-    margin-left: 5px;
-    border: none;
-    background-color: transparent;
-    color: #ff0000;
-    font-weight: bold;
-    cursor: pointer;
-  }
+  padding: 20px;
+}
+
+.recipe-finder h2 {
+  margin-bottom: 20px;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.option {
+  flex-basis: 300px;
+}
+
+.option label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.tag button {
+  margin-left: 5px;
+  border: none;
+  background-color: transparent;
+  color: #ff0000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.recipes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+.recipe {
+  text-align: center;
+}
+
+.recipe img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.recipe h3 {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}

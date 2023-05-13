@@ -9,7 +9,7 @@ function RecipeFinder() {
   const [recipes, setRecipes] = useState([]);
   const includeInput = useRef()
   const excludeInput = useRef()
-  const numberPerPage = 3;
+  const numberPerPage = 6;
 
   const handleIncludeItemAdd = () => {
     if (includeInput.current.value.trim() !== '') {

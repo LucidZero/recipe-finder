@@ -63,78 +63,91 @@ function RecipeFinder() {
   };
 
 
-return (
-  <div className="recipe-finder">
-    <h2>Recipe Finder</h2>
-    <div className="options">
-      <div className="option">
-        <label htmlFor="includeItems">Include Items:</label>
-        <input
-          type="text"
-          id="includeItems"
-          onKeyDown={(event) => {
-            if (event.key === 'Enter') handleIncludeItemAdd();
-          }}
-          onBlur={handleIncludeItemAdd}
-          ref={includeInput}
-          placeholder="Type and press Enter"
-        />
-        <div className="tags">
-          {includeItems.map((item) => (
-            <div key={item} className="tag">
-              {item}
-              <button onClick={() => handleIncludeItemRemove(item)}>x</button>
-            </div>
-          ))}
+  return (
+    <div className="recipe-finder">
+      <h2>Recipe Finder</h2>
+      <div className="options">
+        {/* Include Items */}
+        <div className="option">
+          <label htmlFor="includeItems">Include Items:</label>
+          <input
+            type="text"
+            id="includeItems"
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') handleIncludeItemAdd();
+            }}
+            onBlur={handleIncludeItemAdd}
+            ref={includeInput}
+            placeholder="Type and press Enter"
+          />
+          <div className="tags">
+            {includeItems.map((item) => (
+              <div key={item} className="tag">
+                {item}
+                <button onClick={() => handleIncludeItemRemove(item)}>x</button>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Exclude Items */}
+        <div className="option">
+          <label htmlFor="excludeItems">Exclude Items:</label>
+          <input
+            type="text"
+            id="excludeItems"
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') handleExcludeItemAdd();
+            }}
+            onBlur={handleExcludeItemAdd}
+            ref={excludeInput}
+            placeholder="Type and press Enter"
+          />
+          <div className="tags">
+            {excludeItems.map((item) => (
+              <div key={item} className="tag">
+                {item}
+                <button onClick={() => handleExcludeItemRemove(item)}>x</button>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Maximum Preparation Time */}
+        <div className="option">
+          <label htmlFor="maxPreparationTime">Maximum Preparation Time (minutes):</label>
+          <input
+            type="number"
+            id="maxPreparationTime"
+            min="0"
+            max="2850"
+            value={maxPreparationTime}
+            onChange={handleMaxPreparationTimeChange}
+          />
+        </div>
+        {/* Submit button */}
+        <div className="submit-option">
+          <button className="submit-button" onClick={handleSubmit}>Submit</button>
         </div>
       </div>
-      <div className="option">
-        <label htmlFor="excludeItems">Exclude Items:</label>
-        <input
-          type="text"
-          id="excludeItems"
-          onKeyDown={(event) => {
-            if (event.key === 'Enter') handleExcludeItemAdd();
-          }}
-          onBlur={handleExcludeItemAdd}
-          ref={excludeInput}
-          placeholder="Type and press Enter"
-        />
-        <div className="tags">
-          {excludeItems.map((item) => (
-            <div key={item} className="tag">
-              {item}
-              <button onClick={() => handleExcludeItemRemove(item)}>x</button>
+      <div className="recipes">
+        {recipes.map((recipe) => (
+          <div key={recipe.id} className="recipe">
+            <div className="image-container">
+              <img src={recipe.image} alt={recipe.title} />
             </div>
-          ))}
-        </div>
-      </div>
-      <div className="option">
-        <label htmlFor="maxPreparationTime">Maximum Preparation Time (minutes):</label>
-        <input
-          type="number"
-          id="maxPreparationTime"
-          min="0"
-          max="2850"
-          value={maxPreparationTime}
-          onChange={handleMaxPreparationTimeChange}
-        />
-        <button onClick={handleSubmit}>Submit</button>
+            <h3>
+              <a
+                href={`https://www.google.com/search?q=${encodeURIComponent(recipe.title)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {recipe.title}
+              </a>
+            </h3>
+          </div>
+        ))}
       </div>
     </div>
-    <div className="recipes">
-      {recipes.map((recipe) => (
-      <div key={recipe.id} className="recipe">
-        <div className="image-container">
-          <img src={recipe.image} alt={recipe.title} />
-        </div>
-        <h3>{recipe.title}</h3>
-      </div>
-    ))}
-    </div>
-
-  </div>
-);
+  );
 
 
 }

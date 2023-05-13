@@ -47,6 +47,11 @@ Follow the instructions below to set up and run the Recipe Finder application lo
 
 3. Click the "Submit" button to fetch recipes based on the entered criteria.
 
-4. The recipes will be displayed below, showing the recipe image and title.
+4. The recipes will be displayed below, showing the recipe image and title, clicking on the recipe title will open a new tab with a Google search for that recipe..
 
 5. Adjust the screen width to observe the responsive behavior of the recipes and input fields. They will adjust their layout and size to accommodate different screen sizes while maintaining their aspect ratio.
+Design
+The recipe finder application has been recently redesigned to offer a more modern and attractive user interface. The interface features a sleek layout with carefully chosen colors and elements for a visually appealing experience.
+## Design
+
+The recipe finder application has been recently redesigned to offer a more modern and attractive user interface. The interface features a sleek layout with carefully chosen colors and elements for a visually appealing experience.

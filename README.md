@@ -2,6 +2,13 @@
 
 Recipe Finder is a web application built with React that allows users to search for recipes based on included and excluded ingredients as well as maximum preparation time. It utilizes the Spoonacular API to fetch recipe data and provides a responsive user interface for a seamless browsing experience.
 
+## Notice
+Please note that this project cannot be published to a webpage due to the requirement of an API key. The API key, which is necessary for the proper functioning of the project, was not committed with the rest of the code for security reasons.
+
+As a result, hosting the project on a live webpage would expose the API key, which is not recommended. To run the project locally, you will need to obtain an API key and configure it in the appropriate files before running the application. Please adjust value "const api_key = apiKey;" or consult the developer for instructions on obtaining and configuring the API key.
+
+Thank you for understanding.
+
 ## Technologies Used
 
 - React

@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import './RecipeFinder.css';
-import apiKey from './api';
 
 function RecipeFinder() {
   const [includeItems, setIncludeItems] = useState([]);
@@ -44,13 +43,12 @@ function RecipeFinder() {
   };
 
   const handleSubmit = () => {
-    const api_key = apiKey; // Use a different variable name here
 
     handleIncludeItemAdd()
     handleExcludeItemAdd()
     const includeIngredientsString = includeItems.join(',');
     const excludeIngredientsString = excludeItems.join(',');
-    const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?includeIngredients=${encodeURIComponent(includeIngredientsString)}&excludeIngredients=${encodeURIComponent(excludeIngredientsString)}&maxReadyTime=${maxPreparationTime || 30}&number=${numberPerPage}&apiKey=${api_key}`;
+    const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?includeIngredients=${encodeURIComponent(includeIngredientsString)}&excludeIngredients=${encodeURIComponent(excludeIngredientsString)}&maxReadyTime=${maxPreparationTime || 30}&number=${numberPerPage}&apiKey=${process.env.REACT_APP_API_KEY}`;
     
     fetch(apiUrl)
       .then((response) => response.json())
